@@ -45,6 +45,8 @@ void UART_SetReceiverEnabled(Uart *uart, uint8_t enabled);
 
 void UART_PutChar( Uart *uart, uint8_t c);
 
+void UART_SendByte( Uart *uart, uint8_t u8Byte);
+
 uint32_t UART_IsRxReady(Uart *uart);
 
 uint8_t UART_GetChar(Uart *uart);

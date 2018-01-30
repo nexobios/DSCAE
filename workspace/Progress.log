@@ -1,0 +1,7 @@
+LOADING	D:\ITESO\2ND_TERM\COM\Team1_Task1\tmp\BaseProject\workspace\Debug\BaseProject.elf
+ANALYZING
+ANALYZING
+EMULATION	POD: Cortex (JTAG,SWD)   CPU: Cortex-M7
+DEBUG	PROTOCOL: SWD; RESET: SoC
+LOADING 	42220 bytes
+PROGRAMMING	Atmel ATSAMV7 (2048 kB) (3 sectors)

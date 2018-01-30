@@ -38,6 +38,7 @@
  *         Headers
  *----------------------------------------------------------------------------*/
 #include "chip.h"
+#include "board.h"
 
 #include <assert.h>
 #include <string.h>
@@ -60,17 +61,21 @@ void UART_Configure(Uart *uart,
 		uint32_t baudrate,
 		uint32_t masterClock)
 {
+
 	/* Reset and disable receiver & transmitter*/
+	/*
 	uart->UART_CR = UART_CR_RSTRX | UART_CR_RSTTX
 		| UART_CR_RXDIS | UART_CR_TXDIS | UART_CR_RSTSTA;
+	*/
+	uart->UART_CR = UART_CR_RSTRX | UART_CR_RSTTX | UART_CR_RSTSTA;
 
 	uart->UART_IDR = 0xFFFFFFFF;
 
-	/* Configure mode*/
-	uart->UART_MR = mode;
-
 	/* Configure baudrate*/
 	uart->UART_BRGR = (masterClock / baudrate) / 16;
+
+	/* Configure mode*/
+	uart->UART_MR = mode;
 
 	uart->UART_CR = UART_CR_TXEN | UART_CR_RXEN;
 
@@ -166,6 +171,20 @@ void UART_PutChar( Uart *uart, uint8_t c)
 
 	/* Wait for the transfer to complete*/
 	while (!UART_IsTxSent(uart));
+}
+
+/**
+ * \brief  Sends one packet of data through the specified UART peripheral. This
+ * function operates synchronously, so it only returns when the data has been
+ * actually sent.
+ *
+ * \param uart    Pointer to an UART peripheral.
+ * \param u8Byte  Byte to send
+ */
+void UART_SendByte( Uart *uart, uint8_t u8Byte)
+{
+	/* Send character*/
+	uart->UART_THR = u8Byte;
 }
 
 /**

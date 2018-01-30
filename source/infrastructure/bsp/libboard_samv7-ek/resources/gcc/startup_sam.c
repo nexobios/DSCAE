@@ -126,7 +126,7 @@ void Dummy_Handler(void);
 #pragma weak QSPI_Handler=Dummy_Handler
 #pragma weak UART2_Handler=Dummy_Handler
 #pragma weak UART3_Handler=Dummy_Handler
-#pragma weak UART4_Handler=Dummy_Handler
+#pragma weak UART4_Handler=UART4_Handler
 #ifdef _SAMV71_TC2_INSTANCE_
 #pragma weak TC6_Handler=Dummy_Handler
 #endif /* _SAM_TC2_INSTANCE_ */

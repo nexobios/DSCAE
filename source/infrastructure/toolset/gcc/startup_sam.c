@@ -51,6 +51,7 @@ void LowLevelInit(void);
 
 /* Default empty handler */
 void Dummy_Handler(void);
+void UART2_Handler(void);
 
 #pragma weak NMI_Handler=Dummy_Handler
 #pragma weak HardFault_Handler=Dummy_Handler
@@ -124,7 +125,7 @@ void Dummy_Handler(void);
 #endif /* _SAM_TWI2_INSTANCE_ */
 #pragma weak SPI1_Handler=Dummy_Handler
 #pragma weak QSPI_Handler=Dummy_Handler
-#pragma weak UART2_Handler=Dummy_Handler
+//#pragma weak UART2_Handler=Dummy_Handler
 #pragma weak UART3_Handler=Dummy_Handler
 #pragma weak UART4_Handler=Dummy_Handler
 #ifdef _SAMV71_TC2_INSTANCE_
@@ -395,6 +396,11 @@ void Dummy_Handler(void)
 {
 		while (1) {
 		}
+}
+
+void UART2_Handler(void)
+{
+  Lin_Isr();
 }
 
 

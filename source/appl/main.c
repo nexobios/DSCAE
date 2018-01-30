@@ -12,6 +12,7 @@
 /*----------------------------------------------------------------------------
  *        Local definitions
  *----------------------------------------------------------------------------*/
+#define BAUDRATE_LIN    9600
 
 FuncPtr array_func[]={
 	vfnTsk_1ms,
@@ -69,7 +70,10 @@ extern int main( void )
   /*MCAN_InitTxQueue(loc_mcan_Config);
   printf( "\n\r-- MCAN Tx Queue Initialized!!! --\n\r" ) ;*/
 
-  	/* Initialize Task Scheduler */
+  /* Initialize LIN */
+  Lin_Init (BAUDRATE_LIN);
+  
+  /* Initialize Task Scheduler */
 	vfnScheduler_Init(&array_func[0]);
 	/* Start execution of task scheduler */
 	vfnScheduler_Start();
