@@ -5,7 +5,8 @@
 #include "board.h"
 #include "app_scheduler.h"
 #include "Tasks.h"
-#include "MemAlloc.h"
+#include "MemAlloc.h" 
+#include "mcan.h"
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -66,8 +67,11 @@ extern int main( void )
   MemAllocInit();
   printf( "\n\r-- Memory Allocation Initialized!!! --\n\r" ) ;
   
-  /*MCAN_InitTxQueue(loc_mcan_Config);
-  printf( "\n\r-- MCAN Tx Queue Initialized!!! --\n\r" ) ;*/
+  /* Init now is cappable of Init, Activate Queue and Enable MCAN */
+  vCANInit();
+  printf( "\n\r-- MCAN driver Initialized!!! --\n\r" ) ;
+  printf( "\n\r-- MCAN Tx Queue Initialized!!! --\n\r" ) ;
+  printf( "\n\r-- MCAN Enabled!!! --\n\r" ) ;
 
   	/* Initialize Task Scheduler */
 	vfnScheduler_Init(&array_func[0]);
