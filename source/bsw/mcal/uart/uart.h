@@ -51,6 +51,8 @@ uint32_t UART_IsRxReady(Uart *uart);
 
 uint8_t UART_GetChar(Uart *uart);
 
+uint8_t UART_GetByte(Uart *uart);
+
 uint32_t UART_GetStatus(Uart *uart);
 
 void UART_EnableIt(Uart *uart,uint32_t mode);

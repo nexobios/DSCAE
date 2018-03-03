@@ -4,9 +4,12 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "board.h"
-#include "uart.h"
+#include "lin_types.h"
+#include "lin_cfg.h"
+
 
 #define MODE_TX_INT     UART_IDR_TXRDY
+#define MODE_RX_INT     UART_IDR_RXRDY
 #define UART_DEVICE     UART2
 #define UART_PINS       PINS_UART2
 #define UART_ID         ID_UART2
@@ -24,30 +27,18 @@
  *----------------------------------------------------------------------------*/
 
 /* Init the LIN Interface */
-extern void Lin_Init (uint16_t LinBaudrate);
+extern void Lin_Init (const LinConfigType_t* psConfig);
 
 /* Sends on LIN Frame if possible */
-extern void Lin_SendFrame (uint8_t LinPid);
+extern Std_ReturnType_t Lin_SendFrame (LinChannelType_t* psChannel, LinPduType_t* psPduInfoPtr);
 
 /* LIN ISR */
-extern void Lin_Isr(void);
+extern void Lin_Isr (void);
 
-/* SM States */
-typedef enum
-   {
-     IDLE         = 0,
-     SEND_BREAK,
-     SEND_SYNC,
-     SEND_PID,
-     SEND_RESPONSE
-   } LinStateType;
+/* Get the status of the LIN SDU reception */
+extern Std_ReturnType_t Lin_GetSlaveResponse ( uint8_t Channel, uint8_t** LinSduPtr );
 
-typedef struct Lin_Frame {
-  LinStateType eCurrentState;
-  uint8_t u8Break;
-  uint8_t u8Sync;
-  uint8_t u8PID;
-  Uart *  psPORT;
-} Lin_Frame_t;
+/* Additional Functions */
+extern void vLinUARTInit(const LinChannelType_t* psUartConfig);
 
 #endif /* #ifndef _LIN_ */

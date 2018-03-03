@@ -135,6 +135,13 @@ uint8_t UART_GetChar(Uart *uart)
 	return uart->UART_RHR;
 }
 
+/* Reads and returns a byte from the UART */
+/* Async - This function shall work along with the RX_INT */
+uint8_t UART_GetByte(Uart *uart)
+{
+	return uart->UART_RHR;
+}
+
 /**
  * \brief   Return 1 if a character can be send to UART
  * \param uart  Pointer to an UART peripheral.

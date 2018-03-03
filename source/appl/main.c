@@ -8,6 +8,7 @@
 #include "MemAlloc.h"
 #include <stdbool.h>
 #include <stdio.h>
+#include "lin_nm.h"
 
 /*----------------------------------------------------------------------------
  *        Local definitions
@@ -59,7 +60,7 @@ extern int main( void )
 
 	/* Enable I and D cache */
 	SCB_EnableICache();
-  SCB_EnableDCache();
+  	SCB_EnableDCache();
 
 	printf( "Configure LED PIOs.\n\r" ) ;
 	_ConfigureLeds() ;
@@ -71,7 +72,7 @@ extern int main( void )
   printf( "\n\r-- MCAN Tx Queue Initialized!!! --\n\r" ) ;*/
 
   /* Initialize LIN */
-  Lin_Init (BAUDRATE_LIN);
+  Lin_Init (&sConfig);
   
   /* Initialize Task Scheduler */
 	vfnScheduler_Init(&array_func[0]);
